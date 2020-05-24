@@ -1,0 +1,7 @@
+.place {
+    height: calc(100%  / 3);
+    width: calc(100%  / 3);
+    display: flex;
+    align-items: center;
+    justify-content:  center;
+}

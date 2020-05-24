@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Place.css';
 
 class Place extends Component {
-    constructor (props) {
-        super(props);
-    }
-    
-    render() {
-        const { value } = this.props;
+      render() {
+        const { value, onChosen } = this.props;
         return (
-            <div>
+            <div className="place" onClick={() => {onChosen()}}>
+                <div>
                 { value }
+                </div>
             </div>
         );
     }
@@ -18,6 +17,8 @@ class Place extends Component {
 
 Place.propTypes = {
     value: PropTypes.string.isRequired,
+
+    onChosen: PropTypes.func.isRequired,
 };
 
 export default Place;
