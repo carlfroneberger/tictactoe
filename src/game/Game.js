@@ -76,7 +76,7 @@ class Game extends Component {
                   <div>There is a winner { isWinner ? 'you' : 'not you lmao'}</div>
                 }
                 <div className="gameContainer">
-                    <Place value={this.state.board[0][0]} onChosen={() =>  this.doMove(0, 0)} />
+                    <Place value={this.state.board[0][0]} onChosen={() => this.doMove(0, 0)} />
                     <Place value={this.state.board[0][1]} onChosen={() => this.doMove(0, 1)} />
                     <Place value={this.state.board[0][2]} onChosen={() => this.doMove(0, 2)} />
                     <Place value={this.state.board[1][0]} onChosen={() => this.doMove(1, 0)} />
