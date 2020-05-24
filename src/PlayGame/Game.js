@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import Place from './Place';
 import './Game.css';
 
+import openSocket from 'socket.io-client';
+
+
 class Game extends Component {
     constructor () {
         super();
+
+        this.socket = openSocket('http://localhost:4000');
+        this.socket.on('message', data => console.log(data));
+
         this.state = {
             userTurn: true,
             isOver: false,
@@ -13,11 +20,11 @@ class Game extends Component {
             // i is down
             // j is across
             board: [['', '', ''],
-                    ['', '', ''],
-                    ['', '', '']],
+            ['', '', ''],
+            ['', '', '']],
         }
     }
-
+    
     // Checks for a win on the most recent move
     // i is most recent move placement for down
     // j is most recent move placement for across
@@ -27,7 +34,7 @@ class Game extends Component {
         if (this.checkDiag(i, j)) return true;
         return false;
     }
-
+    
     checkRow = (i) => {
         const { board } = this.state;
         if (board[i][0] === '') return false;
@@ -41,14 +48,14 @@ class Game extends Component {
         if (board[0][j] === board[1][j] && board[0][j] === board[2][j]) return true;
         return false;
     }
-
+    
     checkDiag = (i, j) => {
         const { board } = this.state;
         if (board[1][1] === '') return false;
         if (board[0][0] === board[1][1] && board[0][0] === board[2][2]) return true
         if (board[0][2] === board[1][1] && board[0][0] === board[0][2]) return true
     }
-
+    
     doMove = (i, j) => {
         const { userTurn, isOver, board } = this.state;
         if (isOver) return;
@@ -57,7 +64,7 @@ class Game extends Component {
         else this.setSquare(i, j, 'O');
         if (this.checkWin(i, j)) this.setState({isOver: true});
     }
-
+    
     setSquare = (i, j, mark) => {
         const { userTurn, board } = this.state;
         board[i][j] = mark;
@@ -67,7 +74,7 @@ class Game extends Component {
             userTurn: !userTurn,
         }); 
     }
-
+    
     render() {
         const { isOver, isWinner } = this.state;
         return (
